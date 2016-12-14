@@ -1,4 +1,4 @@
-package school.bus.rest.model;
+package school.bus.rest.model.stores;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import school.bus.rest.model.BusRoute;
 
 public class BusRoutes {
 	static List<BusRoute> busRoutes = new ArrayList<BusRoute>();

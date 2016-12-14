@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import school.bus.rest.jsonmodel.BusRouteJson;
 import school.bus.rest.model.BusRoute;
-import school.bus.rest.model.BusRoutes;
+import school.bus.rest.model.stores.BusRoutes;
 
 @Path("/bus-service")
 public class RestCallsServlet {
