@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ChildJson {
 
-	@XmlElement public long id;
+	@XmlElement public Integer id;
 	@XmlElement public String name;
 
 }

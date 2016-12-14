@@ -20,12 +20,17 @@ public class Childs {
 		
 	}
 
+	
 
 	public void addChild (Child c)
 	{
 		childMap.put(c.getId(), c);
 	}
 
+	public Child getChild(Integer id)
+	{
+		return childMap.get(id);
+	}
 	
 	public void updateChild(Child c)
 	{

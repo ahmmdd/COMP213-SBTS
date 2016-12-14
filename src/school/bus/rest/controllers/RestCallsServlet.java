@@ -19,10 +19,13 @@ import school.bus.rest.jsonmodel.ChildJson;
 import school.bus.rest.model.Bus;
 import school.bus.rest.model.BusRoute;
 import school.bus.rest.model.Child;
+import school.bus.rest.model.stores.Childs;
 
 @Path("/bus-service")
 public class RestCallsServlet {
 
+	
+	/*
 	@Path("bus/get/{id}")
 	@GET
 	@Produces("application/json")
@@ -44,6 +47,7 @@ public class RestCallsServlet {
 		return Response.status(200).entity(result).build();
 	}
 
+
 	@POST
 	@Path("/bus/put")
 	@Consumes("application/json")
@@ -62,12 +66,16 @@ public class RestCallsServlet {
 		return Response.status(200).entity(response).build();
 	}
 	
+	*/
+	
 	@Path("child/get/{id}")
 	@GET
 	@Produces("application/json")
-	public Response getChild(@PathParam("id") Long id) {
+	public Response getChild(@PathParam("id") Integer id) {
 		Childs cs = new Childs();
-		Child child = cs.retrieve(id);
+		Child child = cs.getChild(id);
+		
+		
 		if (child == null) {
 			return Response.status(400).entity("Bus is not found").build();
 		}
@@ -91,7 +99,7 @@ public class RestCallsServlet {
 		child.setId(cj.id);
 		child.setName(cj.name);
 
-		cs.put(child);
+		cs.addChild(child);;
 		String response = "Data Received: " + cj.id + "{" + cj.name + "]";
 		System.out.println(response);
 		return Response.status(200).entity(response).build();
