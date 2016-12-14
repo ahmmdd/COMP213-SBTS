@@ -80,8 +80,8 @@ public class BusStop implements Serializable {
 		return location;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLocation(double latitude, double longitude) {
+		//this.location = location;
 	}
 
 	@Override
