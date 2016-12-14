@@ -84,7 +84,7 @@ public class RestCallsServlet {
 	@POST
 	@Path("/child/put")
 	@Consumes("application/json")
-	public Response putBus(final ChildJson cj) throws ParseException {
+	public Response putChild(final ChildJson cj) throws ParseException {
 		Childs cs = new Childs();
 		
 		Child child = new Child();
