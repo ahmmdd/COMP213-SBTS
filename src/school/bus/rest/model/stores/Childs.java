@@ -29,7 +29,17 @@ public class Childs {
 
 	public Child getChild(Integer id)
 	{
-		return childMap.get(id);
+		
+		
+		if(childMap.containsKey(id))
+		{
+			return childMap.get(id);
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 	
 	public void updateChild(Child c)
