@@ -3,6 +3,7 @@ package school.bus.rest.model;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.Version;
 import java.sql.Time;
 
 @Entity
-public class ScheduledStop implements Serializable {
+public class ScheduledStop extends BusStop implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -20,7 +21,15 @@ public class ScheduledStop implements Serializable {
 	@Version
 	@Column(name = "version")
 	private int version;
-
+	
+	@ManyToOne
+	@Column
+	private BusStop stop;
+	
+	public ScheduledStop(BusStop stop, Time predictedTime){
+		this.stop = stop;
+		this.predictedTime = predictedTime;
+	}
 	@Column
 	private Time predictedTime;
 
@@ -71,5 +80,13 @@ public class ScheduledStop implements Serializable {
 
 	public void setPredictedTime(Time predictedTime) {
 		this.predictedTime = predictedTime;
+	}
+
+	public BusStop getStop() {
+		return stop;
+	}
+
+	public void setStop(BusStop stop) {
+		this.stop = stop;
 	}
 }
