@@ -21,14 +21,6 @@ public class SystemAdmin extends User implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
 	public int getVersion() {
 		return this.version;
 	}
