@@ -25,7 +25,7 @@ public class Schedule implements Serializable {
 	private int version;
 
 	@OneToMany
-	private Set<ScheduledStop> scheduledStops = new HashSet<ScheduledStop>();
+	private Set<BusStop> scheduledStops = new HashSet<BusStop>();
 
 	public Long getId() {
 		return this.id;
@@ -76,6 +76,16 @@ public class Schedule implements Serializable {
 		return result;
 	}
 
+	public BusStop addStop(BusStop e){
+		if(scheduledStops.add(e)) return e;
+		return null;
+	}
+	
+	public BusStop removeStop(BusStop e){
+		if(scheduledStops.remove(e)) return e;
+		return null;
+	}
+	
 	public Set<ScheduledStop> getScheduledStops() {
 		return this.scheduledStops;
 	}
