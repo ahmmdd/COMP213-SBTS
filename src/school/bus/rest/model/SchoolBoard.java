@@ -31,14 +31,6 @@ public class SchoolBoard extends User implements Serializable {
 	@OneToMany
 	private Set<TransportCompanyMember> transportCompanyMembers = new HashSet<TransportCompanyMember>();
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
 	public int getVersion() {
 		return this.version;
 	}

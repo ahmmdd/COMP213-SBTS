@@ -28,13 +28,6 @@ public class Parent extends User implements Serializable {
 	@ManyToMany
 	private Set<Child> children = new HashSet<Child>();
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
 
 	public int getVersion() {
 		return this.version;
