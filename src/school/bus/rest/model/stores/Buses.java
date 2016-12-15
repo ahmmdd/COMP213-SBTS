@@ -13,6 +13,10 @@ public class Buses {
 		bus.setId(1L);
 		bus.setLatitude(12.2);
 		bus.setLongitude(3.25);
+		bus.setStatus("On Time");
+		Childs ch = new Childs();
+		bus.addChild(ch.getChild(1));
+		bus.addChild(ch.getChild(3));
 		buses.put(bus.getId(), bus);
 	}
 	public Buses() {

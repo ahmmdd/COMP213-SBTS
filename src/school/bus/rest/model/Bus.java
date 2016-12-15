@@ -52,7 +52,7 @@ public class Bus implements Serializable {
 	}
 
 	@Enumerated
-	private BusStatus status;
+	private String status;
 
 	@ManyToOne
 	private Schedule schedule;
@@ -111,12 +111,12 @@ public class Bus implements Serializable {
 		return null;
 	}
 	
-	public BusStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(BusStatus status) {
-		this.status = status;
+	public void setStatus(String status2) {
+		this.status = status2;
 	}
 
 	public Schedule getSchedule() {
