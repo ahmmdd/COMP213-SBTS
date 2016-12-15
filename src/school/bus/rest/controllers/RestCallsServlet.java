@@ -23,9 +23,14 @@ import school.bus.rest.jsonmodel.ChildJson;
 import school.bus.rest.model.Bus;
 import school.bus.rest.model.BusStop;
 import school.bus.rest.model.Child;
+import school.bus.rest.model.Parent;
+import school.bus.rest.model.TransportCompanyMember;
+import school.bus.rest.model.User;
 import school.bus.rest.model.stores.BusStops;
 import school.bus.rest.model.stores.Buses;
 import school.bus.rest.model.stores.Childs;
+import school.bus.rest.model.stores.Parents;
+import school.bus.rest.model.stores.Users;
 
 @Path("/bus-service")
 public class RestCallsServlet {
@@ -198,6 +203,101 @@ public class RestCallsServlet {
 		return Response.status(200).entity(response).build();
 	}
 
+	/*USER +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Path("user/get/{id}")
+	@GET
+	@Produces("application/json")
+	public Response getUser(@PathParam("id") Integer id) {
+		Users us = new Users();
+		User user = us.getUser(id);
+
+		if (user == null) {
+			return Response.status(400).entity("User is not found").build();
+		}
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("id", user.getId());
+		jsonObject.put("name", user.getName());
+		jsonObject.put("login", user.getLogin());
+		jsonObject.put("password", user.getPassword());
+
+		String result = "@Produces(\"application/json\") Output: \n\n" + jsonObject;
+		return Response.status(200).entity(result).build();
+	}
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	/*PARENT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@GET
+	@Path("/parent/{parentId}/addChild/{childId}")
+	public Response putParent(@PathParam("parentId") Long parentId, @PathParam("childId") Integer childId)
+			throws ParseException {
+		Parents ps = new Parents();
+		Childs cs = new Childs();
+
+		Parent parent = ps.getParent(parentId);
+		if (parent == null) {
+			return Response.status(400).entity("Parent is not found").build();
+		}
+
+		Child child = cs.getChild(childId);
+		if (child == null) {
+			return Response.status(400).entity("Child is not found").build();
+		}
+
+		parent.setChildren((Set<Child>) child);
+
+		String response = "Parent: " + parentId + " updated " + "[Child " + childId + " added]";
+		System.out.println(response);
+		return Response.status(200).entity(response).build();
+	}
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	/*SCHOOLBOARD +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@POST
+	@Path("/schoolboard/put")
+	@Consumes("application/json")
+	public Response putBus(final SchoolBoardJson bj) throws ParseException {
+		Buses bs = new Buses();
+
+		Bus bus = new Bus();
+		bus.setId(bj.id);
+		bus.setStatus(bj.status);
+		bus.setLatitude(bj.latitude);
+		bus.setLongitude(bj.longitude);
+
+		bs.add(bus);
+		String response = "Data Received: " + bj.id + "[" + bj.status + "]";
+		System.out.println(response);
+		return Response.status(200).entity(response).build();
+	}
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	/*TRANSPORT COMPANY MEMBER +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@POST
+	@Path("/transportcompanymember/{transportcompanymemberId}/addChild/{childId}")
+	public Response putTransportCompanyMember(@PathParam("transportcompanymemberId") Long transportcompanymemberId, @PathParam("childId") Integer childId)
+			throws ParseException {
+		TransportCompanyMember tcms = new TransportCompanyMember();
+		Childs cs = new Childs();
+
+		TransportCompanyMember transportcompanymember = tcms.getTransportCompanyMember(transportcompanymemberId);
+		if (transportcompanymember == null) {
+			return Response.status(400).entity("Transport Company Member is not found").build();
+		}
+
+		Child child = cs.getChild(childId);
+		if (child == null) {
+			return Response.status(400).entity("Child is not found").build();
+		}
+
+		transportcompanymember.addChild(child);
+
+		String response = "Parent: " + transportcompanymemberId + " updated " + "[Child " + childId + " added]";
+		System.out.println(response);
+		return Response.status(200).entity(response).build();
+	}
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	/*SYSTEM ADMIN +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	
 	@GET
 	@Path("/status")
 	@Produces(MediaType.TEXT_PLAIN)
