@@ -28,9 +28,28 @@ public class Bus implements Serializable {
 	@Version
 	@Column(name = "version")
 	private int version;
+	
 
 	@Column
-	private Location location;
+	private double Longitude;
+	@Column
+	private double Latitude;
+
+	public double getLongitude() {
+		return Longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		Longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return Latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		Latitude = latitude;
+	}
 
 	@Enumerated
 	private BusStatus status;
@@ -81,15 +100,17 @@ public class Bus implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-	public Location getLocation() {
-		return location;
+	
+	public Child addChild(Child e){
+		if(ridingChildren.add(e)) return e;
+		return null;
 	}
-
-	public void setLocation(Location location) {
-		this.location = location;
+	
+	public Child removeChild(Child e){
+		if(ridingChildren.remove(e)) return e;
+		return null;
 	}
-
+	
 	public BusStatus getStatus() {
 		return status;
 	}
