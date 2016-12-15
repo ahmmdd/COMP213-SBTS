@@ -26,13 +26,15 @@ public class ScheduledStop extends BusStop implements Serializable {
 	@Column
 	private BusStop stop;
 	
+	
+	@Column
+	private Time predictedTime;
+	
 	public ScheduledStop(BusStop stop, Time predictedTime){
 		this.stop = stop;
 		this.predictedTime = predictedTime;
 	}
-	@Column
-	private Time predictedTime;
-
+	
 	public Long getId() {
 		return this.id;
 	}

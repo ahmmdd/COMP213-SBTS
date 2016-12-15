@@ -108,6 +108,16 @@ public class BusRoute implements Serializable {
 	public void setSchedule(Schedule schedule) {
 		this.schedule = schedule;
 	}
+	
+	public Bus addBus(Bus e){
+		if(buses.add(e)) return e;
+		return null;
+	}
+	
+	public Bus removeBus(Bus e){
+		if(buses.remove(e)) return e;
+		return null;
+	}
 
 	@Override
 	public String toString() {

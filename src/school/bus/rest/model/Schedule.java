@@ -76,6 +76,18 @@ public class Schedule implements Serializable {
 		return result;
 	}
 
+	public ScheduledStop addStop(ScheduledStop e) {
+		if (scheduledStops.add(e))
+			return e;
+		return null;
+	}
+
+	public ScheduledStop removeStop(ScheduledStop e) {
+		if (scheduledStops.remove(e))
+			return e;
+		return null;
+	}
+
 	public Set<ScheduledStop> getScheduledStops() {
 		return this.scheduledStops;
 	}
