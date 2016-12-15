@@ -1,47 +1,48 @@
 package school.bus.rest.model.stores;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import school.bus.rest.model.BusRoute;
 import school.bus.rest.model.BusStop;
-import school.bus.rest.model.Location;
 
 public class BusStops {
-	static List<BusStop> busStops = new ArrayList<BusStop>();
+	static Map<Long, BusStop> busStops = new HashMap<Long, BusStop>();
 	
 	static{
-		
 		BusStop bs = new BusStop();
-		bs.setLocation(1.0,1.0);
+		bs.setId(1L);
+		bs.setLatitude(12.53);
+		bs.setLongitude(82.32);
 		bs.setStopName("Eglinton Ave and Victoria Park Ave");
-		busStops.add(bs);
+		busStops.put(1L, bs);
 		bs = new BusStop();
-		bs.setLocation(1.0,1.0);
+		bs.setId(2L);
+		bs.setLatitude(22.12);
+		bs.setLongitude(32.12);
 		bs.setStopName("Eglinton Ave and Pharmacy Ave");
-		busStops.add(bs);
+		busStops.put(2L, bs);
 	}
 	public BusStops() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
-	public BusStop update(BusStop bs)	{
-		busStops.add(bs);
+	public BusStop update(BusStop bs){
+		if(!busStops.containsKey(bs.getId())){
+			return null;
+		}
+		busStops.put(bs.getId(), bs);
 		return bs;
 	}
 	
-	public BusStop retrieve(String stopName){
-		for(int i = busStops.size()-1;i>=0;i--)
-		{
-			if(busStops.get(i).getStopName().equals(stopName)){
-				return busStops.get(i);
-			}
+	public BusStop add(BusStop bs){
+		if(busStops.containsKey(bs.getId())){
+			return null;
 		}
-		return null;
+		return busStops.put(bs.getId(), bs);
+	}
+	
+	public BusStop get(Long id){
+		return busStops.get(id);
 	}
 	
 }
